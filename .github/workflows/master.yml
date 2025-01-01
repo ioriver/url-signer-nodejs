@@ -52,7 +52,6 @@ jobs:
         if: success()
         run: |
           git add package.json package-lock.json
-          git commit -m "New version release - Bump version"
           git push
 
   publish:
