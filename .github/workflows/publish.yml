@@ -38,18 +38,14 @@ jobs:
         run: |
           npm test
 
-      - name: Bump Version
-        if: success()
-        run: |
-          npm version major --force
-
-      - name: Push changes
+      - name: Bump Version && Push changes
         if: success()
         run: |
           git config --global user.email "url-signer-nodejs@ioriver.io"
           git config --global user.name "url-signer-nodejs"
           git config --global credential.helper store
           git config --global credential.helper 'cache --timeout=3600'
+          npm version major --force
           git add package.json package-lock.json
           git commit -m "New version release - Bump version"
           git push
