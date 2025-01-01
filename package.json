@@ -1,6 +1,6 @@
 {
   "name": "@ioriver/url-signer-js",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A Node.js library for generating signed URLs",
   "main": "urlSigner.js",
   "scripts": {
@@ -18,5 +18,16 @@
     "branches": [
       "master"
     ]
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ioriver/url-signer-nodejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ioriver/url-signer-nodejs/issues"
+  },
+  "homepage": "https://github.com/ioriver/url-signer-nodejs#readme"
 }
