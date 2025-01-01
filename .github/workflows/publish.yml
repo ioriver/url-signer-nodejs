@@ -1,0 +1,29 @@
+name: Publish Package to npmjs
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: 'master-merge'
+  cancel-in-progress: true
+
+# Add "id-token" with the intended permissions.
+permissions:
+  contents: 'read'
+  id-token: 'write'
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.12'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm test
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
