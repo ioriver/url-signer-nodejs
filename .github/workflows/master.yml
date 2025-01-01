@@ -1,10 +1,10 @@
 name: Master merged
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - 'master'
+    branches: [ 'master' ]
+  workflow_dispatch:
+    branches: [ 'master' ]
 
 concurrency:
   group: 'master-merge'
@@ -19,8 +19,51 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
-      # Setup .npmrc file to publish to npm
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.12'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Bump Version
+        if: success()
+        run: |
+          git config --global user.email "url-signer-nodejs@ioriver.io"
+          git config --global user.name "url-signer-nodejs"
+          git config --global credential.helper store
+          git config --global credential.helper 'cache --timeout=3600'
+          npm version major --force
+
+      - name: Install
+        run: |
+          npm install
+
+      - name: CI
+        run: |
+          npm ci
+
+      - name: Test
+        run: |
+          npm test
+
+      - name: Push changes
+        if: success()
+        run: |
+          git add package.json package-lock.json
+          git commit -m "New version release - Bump version"
+          git push
+
+  publish:
+    needs: [ build ]
+    runs-on: ubuntu-22.04
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: '22.12'
