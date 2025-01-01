@@ -68,10 +68,10 @@ jobs:
           node-version: '22.12'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Install
+      - name: CI
         run: |
-          npm install
+          npm ci
 
       - name: Publish to npm
         run: |
-          npm publish --access public
+          npm publish --provenance --access public
