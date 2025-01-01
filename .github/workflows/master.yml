@@ -12,7 +12,7 @@ concurrency:
 
 # Add "id-token" with the intended permissions.
 permissions:
-  contents: 'read'
+  contents: 'write'
   id-token: 'write'
 
 jobs:
