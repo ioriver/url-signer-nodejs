@@ -25,5 +25,11 @@ jobs:
         with:
           node-version: '22.12'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
-      - run: npm test
+
+      - name: Install
+        run: |
+          npm install
+
+      - name: Publish to npm
+        run: |
+          npm publish
