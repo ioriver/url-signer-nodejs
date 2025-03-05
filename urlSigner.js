@@ -16,13 +16,13 @@ class UrlSigner {
     policy.fromDict(policyData);
 
     let signatures = [];
-    if (this.providersKeyInfo.cloudfrontKeyId !== null) {
+    if (this.providersKeyInfo.cloudfrontKeyId !== undefined) {
       signatures.push(this._generateCloudfrontSignedUrl(policy));
     }
-    if (this.providersKeyInfo.fastlyKeyId !== null) {
+    if (this.providersKeyInfo.fastlyKeyId !== undefined) {
       signatures.push(this._generateFastlySignedUrl(policy));
     }
-    if (this.providersKeyInfo.akamaiKeyId !== null) {
+    if (this.providersKeyInfo.akamaiKeyId !== undefined) {
       signatures.push(this._generateAkamaiSignedUrl(policy));
     }
 
