@@ -27,15 +27,6 @@ jobs:
           node-version: '22.12'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Bump Version
-        if: success()
-        run: |
-          git config --global user.email "url-signer-nodejs@ioriver.io"
-          git config --global user.name "url-signer-nodejs"
-          git config --global credential.helper store
-          git config --global credential.helper 'cache --timeout=3600'
-          npm version minor --force
-
       - name: Install
         run: |
           npm install
@@ -48,10 +39,14 @@ jobs:
         run: |
           npm test
 
-      - name: Push changes
+      - name: Bump Version
         if: success()
         run: |
-          git add package.json package-lock.json
+          git config --global user.email "url-signer-nodejs@ioriver.io"
+          git config --global user.name "url-signer-nodejs"
+          git config --global credential.helper store
+          git config --global credential.helper 'cache --timeout=3600'
+          npm version minor
           git push
 
   publish:
