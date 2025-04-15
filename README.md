@@ -1,6 +1,6 @@
 # url-signer-nodejs
 
-[![npm version](https://img.shields.io/npm/v/url-signer-nodejs)](https://www.npmjs.com/package/@ioriver/url-signer-js)
+[![npm version](https://img.shields.io/npm/v/@ioriver/url-signer-js)](https://www.npmjs.com/package/@ioriver/url-signer-js)
 [![Build Status](https://github.com/ioriver/url-signer-nodejs/actions/workflows/master.yml/badge.svg)](https://github.com/ioriver/url-signer-nodejs/actions)
 
 ## Overview
