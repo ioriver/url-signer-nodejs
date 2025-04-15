@@ -35,7 +35,7 @@ jobs:
 
       - name: CI
         run: |
-          npm ci
+          npm ci --verbose
 
       - name: Test
         run: |
@@ -48,11 +48,11 @@ jobs:
           git config --global user.name "url-signer-nodejs"
           git config --global credential.helper store
           git config --global credential.helper 'cache --timeout=3600'
-          npm version minor
+          npm version minor --verbose
 
       - name: Publish to npm
         run: |
-          npm publish --access public
+          npm publish --access public --verbose
 
       - name: Push changes to git
         run: |
