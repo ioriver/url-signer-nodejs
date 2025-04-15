@@ -48,7 +48,7 @@ const signer = new UrlSigner(privateKey, encryptionKey, providersKeyInfo);
 ### Step 2: Generate Signature
 
 ```javascript
-# the policy to be signed
+// the policy to be signed
 const policy = {
   resources: "https://example.com/*",
   condition: {
@@ -56,7 +56,7 @@ const policy = {
   },
 };
 
-# generate signature for all CDNs
+// generate signature for all CDNs
 const signature = singer.generateUrlSignature(policy);
 ```
 

@@ -52,9 +52,9 @@ class UrlSigner {
     };
 
     if (policy.condition) {
-      if (policy.condition.startTime) params.start_time = policy.condition.startTime;
-      if (policy.condition.endTime) params.end_time = policy.condition.endTime;
-      if (policy.condition.ipAddresses) params.ip_addresses = policy.condition.ipAddresses;
+      if (policy.condition.startTime !== undefined) params.start_time = policy.condition.startTime;
+      if (policy.condition.endTime !== undefined) params.end_time = policy.condition.endTime;
+      if (policy.condition.ipAddresses !== undefined) params.ip_addresses = policy.condition.ipAddresses;
     }
 
     const policyUrlEncoded = new URLSearchParams(params).toString().replace(/\*/g, "%2A");
@@ -73,11 +73,11 @@ class UrlSigner {
       endTime: policy.condition.endTime,
     };
 
-    if (policy.condition.startTime !== null) {
+    if (policy.condition.startTime !== undefined) {
       akamaiPolicy.startTime = policy.condition.startTime;
     }
 
-    if (policy.condition.ipAddresses !== null) {
+    if (policy.condition.ipAddresses !== undefined) {
       akamaiPolicy.ip = policy.condition.ipAddresses;
     }
 
@@ -100,13 +100,13 @@ class UrlSigner {
       ],
     };
 
-    if (policy.condition.startTime !== null) {
+    if (policy.condition.startTime !== undefined) {
       awsPolicy.Statement[0].Condition.DateGreaterThan = {
         "AWS:EpochTime": policy.condition.startTime,
       };
     }
 
-    if (policy.condition.ipAddresses !== null) {
+    if (policy.condition.ipAddresses !== undefined) {
       awsPolicy.Statement[0].Condition.IpAddress = {
         "AWS:SourceIp": policy.condition.ipAddresses,
       };
