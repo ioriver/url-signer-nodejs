@@ -48,7 +48,7 @@ jobs:
           git config --global user.name "url-signer-nodejs"
           git config --global credential.helper store
           git config --global credential.helper 'cache --timeout=3600'
-          npm version minor --verbose
+          npm version major --verbose
 
       - name: Publish to npm
         run: |
