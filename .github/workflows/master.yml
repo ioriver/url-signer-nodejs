@@ -18,6 +18,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -47,26 +49,11 @@ jobs:
           git config --global credential.helper store
           git config --global credential.helper 'cache --timeout=3600'
           npm version minor
-          git push
-
-  publish:
-    needs: [ build ]
-    runs-on: ubuntu-22.04
-    env:
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22.12'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: CI
-        run: |
-          npm ci
 
       - name: Publish to npm
         run: |
           npm publish --access public
+
+      - name: Push changes to git
+        run: |
+          git push
