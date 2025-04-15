@@ -1,6 +1,6 @@
 {
   "name": "@ioriver/url-signer-js",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A Node.js library for generating signed URLs",
   "main": "urlSigner.js",
   "scripts": {
