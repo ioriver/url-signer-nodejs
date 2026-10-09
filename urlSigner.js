@@ -82,8 +82,13 @@ class UrlSigner {
     }
 
     const et = new EdgeAuth(akamaiPolicy);
-    const token = et.generateACLToken(policy.resources);
+    var acl = [this._extractPath(policy.resources)];
+    const token = et.generateACLToken(acl);
     return `AK-Signature-${this.providersKeyInfo.akamaiKeyId}=${token}`;
+  }
+
+  _extractPath(resource) {
+    return new URL(resource).pathname;
   }
 
   _makeCloudfrontPolicy(policy) {
