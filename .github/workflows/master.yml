@@ -18,15 +18,13 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    env:
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.12'
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install
